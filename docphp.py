@@ -554,6 +554,8 @@ class PopupHTMLParser(HTMLParser):
         return False
 
     def get_tag_text(self, tag, attrs, is_startend=False):
+        if type(attrs) is list:
+            attrs = dict(attrs)
         return '<' + (tag + ' ' + ' '.join(map(lambda m: m + '="' + re.sub('(?<!\\\\)"', '\\"', attrs[m]) + '"', attrs))).rstrip() + (' />' if is_startend else '>')
 
 
